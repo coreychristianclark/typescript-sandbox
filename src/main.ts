@@ -163,41 +163,101 @@
 //////////////////////////////////////////////////////
 
 
-// It could be argued that using 'type aliases' over interfaces is better.
+// It could be argued that using 'type aliases' over interfaces is better/cleaner.
 // With an interface, you do not have the '=' sign. An interface must always be an object.
 
-type Admin = string;
+// type Admin = string;
 
-const boss: Admin = 'Joe';
+// const boss: Admin = 'Joe';
 
-// With a type, you're able to use unions. It allows you to set two different rule sets in one template. With interfaces, you cannot.
-// This example would allow us to either use a singular address, or use an array to list multiple addresses:
+// // With a type, you're able to use unions. It allows you to set two different rule sets in one template. With interfaces, you cannot.
+// // This example would allow us to either use a singular address, or use an array to list multiple addresses:
 
-type Address = string | string[];
+// type Address = string | string[];
 
-const addressSingular: Address = 'Washington, PA';
-const addressMultiple: Address = ['Pittsburgh, PA', 'Cecil, PA', 'Springhill, FL'];
+// const addressSingular: Address = 'Washington, PA';
+// const addressMultiple: Address = ['Pittsburgh, PA', 'Cecil, PA', 'Springhill, FL'];
 
-// Like with an interface, a type can also be an object:
+// // Like with an interface, a type can also be an object:
 
-type Car = {
-    make: string
-    model: string
-    year: number
-}
+// type Car = {
+//     make: string
+//     model: string
+//     year: number
+// }
 
-const myCar: Car = {
-    make: 'Hyundai',
-    model: 'Accent',
-    year: 2019,
-}
+// const myCar: Car = {
+//     make: 'Hyundai',
+//     model: 'Accent',
+//     year: 2019,
+// }
 
-// If you wish to use a template, but leave out some values, you can use the 'Omit' keyword:
+// // If you wish to use a template, but want to leave out some values, you can use the 'Omit' keyword:
 
-type UserProps = {
-    name: string;
-    age: number;
-    created: Date;
-}
+// type UserProps = {
+//     name: string;
+//     age: number;
+//     created: Date;
+// }
 
-type GuestProps = Omit<UserProps, "name" | "age">;
+// type GuestProps = Omit<UserProps, "name" | "age">;
+
+// // Another example of creating a type that can take 3 parameters can be done without an 'either / or'. You can make parameters mandatory in another way:
+
+// type AddressArray = [number, string];
+
+// const addresses = [123, 'Grant Street', 456, 'Bishop Ave', 789, 'Hatfield Ave'];
+
+// // In the above example, you're able to make it so you can have a number and string within an array type.
+
+// // Interfaces can be 'merged'. If you have more than one interface with the same name, it will merge the properties, but multiple blocks of code will still exist. This could become confusing on a huge project. Confusion is not good.
+// interface User {
+//     name: string;
+//     age: number;
+// }
+// interface User {
+//     role: string;
+// }
+
+// // We have two interfaces that have merged properties and no errors were thrown. Because we can declare an interface more than once, there's no telling when it could change. This leads to being UNPREDICTABLE.
+
+// let newUser: User = {
+//     name: 'Corey',
+//     age: 32,
+//     role: 'Developer',
+// }
+
+// // But if we were to create two of the same type aliases, it won't even let you declare it more than once:
+
+// type Wrestling = {
+//     team: string;
+//     colors: string;
+//     members: number;
+// }
+
+// type Wrestling = {
+//     ages: number;
+// }
+
+// // As shown above, it will not allow us to use the same type alias twice. This allows for a more straightforward structure. TypeScript is about keeping things simple and uniform -- this aligns with that.
+// // You can still 'extend' a type alias, but it would need to be laid out as such:
+
+// type Wrestling2 = Wrestling & {
+//     role: string;
+// }
+
+// let coach: Wrestling2 = {
+//     team: 'Tenth',
+//     colors: 'red',
+//     members: 23,
+//     role: 'front',
+// }
+
+// In the above example, if we make the 'coach' variable contingent on the type 'Wrestling', it'll require us to use the properties listed in Wrestling. All is well. But if we make it contingent on type Wrestling2, it will require all of the properties from Wrestling AND Wrestling2.
+// All in all, it is called TYPEscript... not INTERFACEscript. Interfaces have their place, but it does seem like type aliases are a great default habit to get into.
+//////////////////////////////////////////////////////
+
+
+
+
+
