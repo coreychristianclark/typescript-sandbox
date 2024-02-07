@@ -258,6 +258,42 @@
 //////////////////////////////////////////////////////
 
 
+// In this example, we are using generic types. They are used to show a correlation between different values/expected values of code. They are superior to 'any', because unlike 'any', generic types can be named anything you want, but still produce a correlation.
+// When using generic types, it's important to always first include them in angle brackets after the variable/function name '<>'. Then the desired generic next to the parameter(s), and then after the parameters to define the expected type within the produced result.
+// In this example, you can see we have our two desired generic types in angle brackets '<T, K>', what we expect each parameter to me 'T and then K', and then our expected result output '[T and K in array format]'. Remember, it's about creating correlation.
 
+// function createArrayPair<T, K>(input1: T, input2: K): [T, K] {
+//     return [input1, input2];
+// };
 
+// createArrayPair("Hello", 10);
 
+// The above example is with a traditional function. The below example is what an arrow function format would look like.
+// The format is SLIGHTLY different (the angle brackets <> go after the = sign), but the principles are the same. Generics help us avoid the use 'any'. 'Any' is no good, and we can do better.
+
+// const arrayPair = <T, K>(input1: T, input2: K): [T, K] => {
+//     return [input1, input2];
+// };
+
+// arrayPair("Hello", 10);
+
+// Generic types can even be used in place of regular types. While there's no reason to do this if the type exists, this is to show it's possible. These two examples would grant the same results:
+
+// function primeExample(input1: string, input2: number): string {
+//     return `Hello, my name is ${input1} and I am ${input2} years of age.`;
+// };
+// console.log(primeExample("Corey", 32));
+
+// function primeExample2<T, S>(input1: T, input2: S): string {
+//     return `Hello, my name is ${input1} and I am ${input2} years of age.`;
+// }
+// console.log(primeExample2("Corey", 32));
+
+// // Note in the example above that we only list STRING for the output of the function -- not string AND number. Because while the function does have a number parameter, the overall output is a STRING, even when a number is contained within it.
+
+// // The use of VOID is also worth noting on this matter. If a function merely performs an action but doesn't produce a result, the function output should be set to VOID (as seen below):
+
+// function primeExample3(message: string): void {
+//     console.log(message);
+// }
+//////////////////////////////////////////////////////
