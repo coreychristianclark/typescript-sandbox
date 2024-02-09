@@ -170,15 +170,15 @@
 
 // const boss: Admin = 'Joe';
 
-// // With a type, you're able to use unions. It allows you to set two different rule sets in one template. With interfaces, you cannot.
-// // This example would allow us to either use a singular address, or use an array to list multiple addresses:
+// With a type, you're able to use unions. It allows you to set two different rule sets in one template. With interfaces, you cannot.
+// This example would allow us to either use a singular address, or use an array to list multiple addresses:
 
 // type Address = string | string[];
 
 // const addressSingular: Address = 'Washington, PA';
 // const addressMultiple: Address = ['Pittsburgh, PA', 'Cecil, PA', 'Springhill, FL'];
 
-// // Like with an interface, a type can also be an object:
+// Like with an interface, a type can also be an object:
 
 // type Car = {
 //     make: string
@@ -192,7 +192,7 @@
 //     year: 2019,
 // }
 
-// // If you wish to use a template, but want to leave out some values, you can use the 'Omit' keyword:
+// If you wish to use a template, but want to leave out some values, you can use the 'Omit' keyword:
 
 // type UserProps = {
 //     name: string;
@@ -202,24 +202,25 @@
 
 // type GuestProps = Omit<UserProps, "name" | "age">;
 
-// // Another example of creating a type that can take 3 parameters can be done without an 'either / or'. You can make parameters mandatory in another way:
+// Another example of creating a type that can take 3 parameters can be done without an 'either / or'. You can make parameters mandatory in another way:
 
 // type AddressArray = [number, string];
 
 // const addresses = [123, 'Grant Street', 456, 'Bishop Ave', 789, 'Hatfield Ave'];
 
-// // In the above example, you're able to make it so you can have a number and string within an array type.
+// In the above example, you're able to make it so you can have a number and string within an array type.
 
-// // Interfaces can be 'merged'. If you have more than one interface with the same name, it will merge the properties, but multiple blocks of code will still exist. This could become confusing on a huge project. Confusion is not good.
+// Interfaces can be 'merged'. If you have more than one interface with the same name, it will merge the properties, but multiple blocks of code will still exist. This could become confusing on a huge project. Confusion is not good.
 // interface User {
 //     name: string;
 //     age: number;
 // }
+
 // interface User {
 //     role: string;
 // }
 
-// // We have two interfaces that have merged properties and no errors were thrown. Because we can declare an interface more than once, there's no telling when it could change. This leads to being UNPREDICTABLE.
+// We have two interfaces that have merged properties and no errors were thrown. Because we can declare an interface more than once, there's no telling when it could change. This leads to being UNPREDICTABLE.
 
 // let newUser: User = {
 //     name: 'Corey',
@@ -227,7 +228,7 @@
 //     role: 'Developer',
 // }
 
-// // But if we were to create two of the same type aliases, it won't even let you declare it more than once:
+// But if we were to create two of the same type aliases, it won't even let you declare it more than once:
 
 // type Wrestling = {
 //     team: string;
@@ -239,8 +240,8 @@
 //     ages: number;
 // }
 
-// // As shown above, it will not allow us to use the same type alias twice. This allows for a more straightforward structure. TypeScript is about keeping things simple and uniform -- this aligns with that.
-// // You can still 'extend' a type alias, but it would need to be laid out as such:
+// As shown above, it will not allow us to use the same type alias twice. This allows for a more straightforward structure. TypeScript is about keeping things simple and uniform -- this aligns with that.
+// You can still 'extend' a type alias, but it would need to be laid out as such:
 
 // type Wrestling2 = Wrestling & {
 //     role: string;
@@ -289,11 +290,33 @@
 // }
 // console.log(primeExample2("Corey", 32));
 
-// // Note in the example above that we only list STRING for the output of the function -- not string AND number. Because while the function does have a number parameter, the overall output is a STRING, even when a number is contained within it.
+// Note in the example above that we only list STRING for the output of the function -- not string AND number. Because while the function does have a number parameter, the overall output is a STRING, even when a number is contained within it.
 
-// // The use of VOID is also worth noting on this matter. If a function merely performs an action but doesn't produce a result, the function output should be set to VOID (as seen below):
+// The use of VOID is also worth noting on this matter. If a function merely performs an action but doesn't produce a result, the function output should be set to VOID (as seen below):
 
 // function primeExample3(message: string): void {
 //     console.log(message);
 // }
 //////////////////////////////////////////////////////
+
+
+// Sometimes, we may not yet know what type something is going to be. There is where type UNKNOWN comes in.
+// For example in the code below -- we know that this fetch code is going to parse the response in JSON, and we know it's going to provide us data, but we don't know what the data is going to be.
+
+// export default async function ProductionPage() {
+//     fetch("https://dummyjson.com/products/1")
+//         .then((res) => res.json())
+//         .then((data) => console.log(data))
+// }
+
+// In the above example, TypeScript defaults the 'data' as 'any'. 'Any' is no good, and we can do better.
+// The example below demonstrates a better way to handle this data so that we can remove the use of 'any'.
+
+// export default async function ProductionPage() {
+//     fetch("https://dummyjson.com/products/1")
+//         .then((res) => res.json())
+//         .then((data: unknown) => console.log(data))
+// }
+
+// In the above example, by adding 'unknown'as the type to data, we keep in check the benefits of TypeScript.
+
