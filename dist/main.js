@@ -1,14 +1,17 @@
 // Using 'any' is very rarely advised. It throws the rule set out of the window. 'any' is bad, and we can do better.
 // let str: any = 'foo';
 // str = 5;
+
 //////////////////////////////////////////////////////
 // str is assigned the type 'string'. This throws an error because you cannot reassign it to anything but a string.
 // let str: string = 'string';
 // str = 5;
+
 //////////////////////////////////////////////////////
 // This will NOT throw an error, because using the '|' operator, we are clarifying that this variable can be a string OR a number type. This is called a UNION.
 // let str: string | number = 'string';
 // str = 5;
+
 //////////////////////////////////////////////////////
 // The first variable(strArray) will throw an error, because its type is a string array (string[]). By simply changing it to a string, it does not meet the type requirements of a string array (string[]).
 // The second variable (strArray2) will not throw an error, because it is successfully changing it from one string array, to another string array. It is a clean exchange and follows the type requirements set.
@@ -16,6 +19,7 @@
 // strArray = 'foo';
 // let strArray2: string[] = ['4', '5', '6']
 // strArray2 = ['foo'];
+
 //////////////////////////////////////////////////////
 // If we leave out a type, it defaults to 'any' and takes away the benefits of TypeScript. We must specify the types for the parameters.
 // Both parameters are set to type 'string'. In the first console.log, it will throw an error because the first parameter is entered as a boolean.
@@ -26,6 +30,7 @@
 // }
 // console.log(getFullName(true, 'Clark'));
 // console.log('Corey', 'Clark');
+
 //////////////////////////////////////////////////////
 // Our first set of types indicate that this is an OBJECT that must consist of a STRING for a name and a NUMBER for an age.
 // When we copy and paste the type requirements from user, to user2, if any property is missing (such as age), it will throw an error.
@@ -56,6 +61,7 @@
 // }
 // When you try to access a variable followed by a '.', it will bring up a list of all available properties to that variable. This is a wonderful 'autocomplete' feature of TypeScrip's. It will only list what that variable has access to.
 // console.log(user.)
+
 //////////////////////////////////////////////////////
 // Let's add a function within an interface.
 // interface User {
@@ -80,6 +86,7 @@
 // }
 // When typing 'user.', the newly-added function is now added to the list of properties you can select.
 // console.log(user.)
+
 //////////////////////////////////////////////////////
 // Here, we have name collision. Because we can make both classes and interfaces in TS, it is best practice to distinctly identify your interface names.
 // class User { };
@@ -87,6 +94,7 @@
 // Here, we've explicitly made known that the interface is an interface by adding 'interface' the name.
 // class User { };
 // interface UserInterface { };
+
 //////////////////////////////////////////////////////
 // Trying to assign a STRING type to an UNKNOWN type will throw an error. However, we are able to remedy this by using TYPE ASSERTION.
 // let vUnknown: unknown = 10;
@@ -98,6 +106,7 @@
 // This process took a number type, assigned it using type assertion to an unknown type, then used type assertion again to change it to a number type.
 // let pageNumber: string = '1';
 // let numericPageNumber: number = (pageNumber as unknown) as number;
+
 //////////////////////////////////////////////////////
 // A common way to pull elements from an HTML document is to query select them, then use type assertion 'as' to list it as an HTML element.
 // In the example below, the '.value' will throw an error. But once you list someElement as an HTMLInputElement, the error goes away.
@@ -110,6 +119,7 @@
 // someElement.addEventListener('blur', (event) => {
 //     console.log('event', target.value)
 // })
+
 //////////////////////////////////////////////////////
 // It could be argued that using 'type aliases' over interfaces is better/cleaner.
 // With an interface, you do not have the '=' sign. An interface must always be an object.
@@ -178,6 +188,7 @@
 // }
 // In the above example, if we make the 'coach' variable contingent on the type 'Wrestling', it'll require us to use the properties listed in Wrestling. All is well. But if we make it contingent on type Wrestling2, it will require all of the properties from Wrestling AND Wrestling2.
 // All in all, it is called TYPEscript... not INTERFACEscript. Interfaces have their place, but it does seem like type aliases are a great default habit to get into.
+
 //////////////////////////////////////////////////////
 // In this example, we are using generic types. They are used to show a correlation between different values/expected values of code. They are superior to 'any', because unlike 'any', generic types can be named anything you want, but still produce a correlation.
 // When using generic types, it's important to always first include them in angle brackets after the variable/function name '<>'. Then the desired generic next to the parameter(s), and then after the parameters to define the expected type within the produced result.
@@ -206,6 +217,7 @@
 // function primeExample3(message: string): void {
 //     console.log(message);
 // }
+
 //////////////////////////////////////////////////////
 // Sometimes, we may not yet know what type something is going to be. There is where type UNKNOWN comes in.
 // For example in the code below -- we know that this fetch code is going to parse the response in JSON, and we know it's going to provide us data, but we don't know what the data is going to be.
